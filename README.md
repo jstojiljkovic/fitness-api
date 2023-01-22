@@ -1,6 +1,6 @@
 # fitness-api
 
-A smart digital api management solution for modern fitness entrepreneurs and personal trainers
+A smart digital api management solution for modern fitness entrepreneurs and personal trainers.
 
 ### TODO
 - [x] Create v1 of ERD
