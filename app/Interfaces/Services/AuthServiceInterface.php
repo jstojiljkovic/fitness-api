@@ -7,7 +7,7 @@ interface AuthServiceInterface
     /**
      * @param array $data
      *
-     * @return string
+     * @return array
      */
-    public function getToken(array $data): string;
+    public function getToken(array $data): array;
 }
