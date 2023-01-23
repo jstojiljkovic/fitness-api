@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\V1\Auth;
 
-use App\Http\Requests\StoreUserRequest;
+use App\Http\Requests\User\StoreUserRequest;
 use App\Interfaces\Services\UserServiceInterface;
 use Illuminate\Http\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;

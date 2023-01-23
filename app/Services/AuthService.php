@@ -12,12 +12,18 @@ class AuthService implements AuthServiceInterface
     /**
      * @param array $data
      *
-     * @return string
+     * @return array
      */
-    public function getToken(array $data): string
+    public function getToken(array $data): array
     {
         if (Auth::attempt($data)) {
-            return Auth::user()->createToken('graphene')->accessToken;
+            $token = Auth::user()->createToken('graphene');
+
+            return [
+                'access_token' => $token->accessToken,
+                'token_type' => 'bearer',
+                'expires_in' => $token->token->expires_at->timestamp
+            ];
         }
 
         abort(Response::HTTP_UNAUTHORIZED, 'Unauthorised');
