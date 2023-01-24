@@ -5,7 +5,7 @@ A smart digital api management solution for modern fitness entrepreneurs and per
 ### TODO
 - [x] Create v1 of ERD
 - [ ] Implementation of v1 ERD
-- [ ] Build CMS
+- [ ] Build CMS (perhaps Nova?)
 - [ ] Basic description
 - [ ] Usage
 - [ ] Examples
