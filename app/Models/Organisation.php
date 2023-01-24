@@ -29,6 +29,8 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @method static Builder|Organisation whereId($value)
  * @method static Builder|Organisation whereName($value)
  * @method static Builder|Organisation whereUpdatedAt($value)
+ * @property-read Collection|\App\Models\Equipment[] $equipments
+ * @property-read int|null $equipments_count
  */
 class Organisation extends Model
 {
@@ -58,5 +60,15 @@ class Organisation extends Model
     public function users(): HasMany
     {
         return $this->hasMany(User::class);
+    }
+
+    /**
+     * Get the equipments for the organisation
+     *
+     * @return HasMany
+     */
+    public function equipments(): HasMany
+    {
+        return $this->hasMany(Equipment::class);
     }
 }

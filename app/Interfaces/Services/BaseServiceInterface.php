@@ -2,7 +2,7 @@
 
 namespace App\Interfaces\Services;
 
-interface OrganisationServiceInterface
+interface BaseServiceInterface
 {
     /**
      * @return array

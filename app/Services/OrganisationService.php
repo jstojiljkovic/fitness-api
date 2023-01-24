@@ -2,21 +2,20 @@
 
 namespace App\Services;
 
-use App\Interfaces\Repositories\OrganisationRepositoryInterface;
-use App\Interfaces\Services\OrganisationServiceInterface;
+use App\Interfaces\Services\BaseServiceInterface;
 
-class OrganisationService implements OrganisationServiceInterface
+class OrganisationService implements BaseServiceInterface
 {
 
     /**
-     * @var OrganisationRepositoryInterface
+     * @var BaseServiceInterface
      */
-    protected OrganisationRepositoryInterface $organisationRepository;
+    protected BaseServiceInterface $organisationRepository;
 
     /**
-     * @param OrganisationRepositoryInterface $organisationRepository
+     * @param BaseServiceInterface $organisationRepository
      */
-    public function __construct(OrganisationRepositoryInterface $organisationRepository)
+    public function __construct(BaseServiceInterface $organisationRepository)
     {
         $this->organisationRepository = $organisationRepository;
     }
@@ -63,18 +62,6 @@ class OrganisationService implements OrganisationServiceInterface
     }
 
     /**
-     * @param string $id
-     *
-     * @return void
-     */
-    public function destroy(string $id): void
-    {
-        $this->checkIfOrganisationExists($id);
-
-        $this->organisationRepository->destroy($id);
-    }
-
-    /**
      * @param $id
      *
      * @return void
@@ -86,5 +73,17 @@ class OrganisationService implements OrganisationServiceInterface
             404,
             'Organisation with the provided id does not exist.'
         );
+    }
+
+    /**
+     * @param string $id
+     *
+     * @return void
+     */
+    public function destroy(string $id): void
+    {
+        $this->checkIfOrganisationExists($id);
+
+        $this->organisationRepository->destroy($id);
     }
 }

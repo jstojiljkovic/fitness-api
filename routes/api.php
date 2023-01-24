@@ -2,7 +2,7 @@
 
 use App\Http\Controllers\V1\Auth\LoginController;
 use App\Http\Controllers\V1\Auth\RegisterController;
-use App\Http\Controllers\V1\OrganisationController;
+use App\Http\Controllers\V1\EquipmentController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -19,6 +19,7 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:api')->prefix('v1')->group(static function () {
     //TODO Access to this will go via CMS
     // Route::apiResource('organisations', OrganisationController::class);
+    Route::apiResource('equipments', EquipmentController::class);
 });
 
 Route::prefix('/v1')->group(static function () {

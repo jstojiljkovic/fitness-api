@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\DatabaseNotification;
 use Illuminate\Notifications\DatabaseNotificationCollection;
@@ -49,6 +50,8 @@ use Laravel\Passport\Token;
  * @method static Builder|User wherePassword( $value )
  * @method static Builder|User whereUpdatedAt( $value )
  * @mixin Eloquent
+ * @property-read Collection|\App\Models\Equipment[] $equipments
+ * @property-read int|null $equipments_count
  */
 class User extends Authenticatable
 {
@@ -84,5 +87,15 @@ class User extends Authenticatable
     public function organisation(): BelongsTo
     {
         return $this->belongsTo(Organisation::class);
+    }
+
+    /**
+     * Get the equipments for the user
+     *
+     * @return HasMany
+     */
+    public function equipments(): HasMany
+    {
+        return $this->hasMany(Equipment::class);
     }
 }
