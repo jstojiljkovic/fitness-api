@@ -4,18 +4,18 @@ namespace App\Http\Controllers\V1;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Organisation\StoreOrganisationRequest;
-use App\Interfaces\Services\OrganisationServiceInterface;
+use App\Interfaces\Services\BaseServiceInterface;
 use Illuminate\Http\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 
 class OrganisationController extends Controller
 {
-    protected OrganisationServiceInterface $organisationService;
+    protected BaseServiceInterface $organisationService;
 
     /**
-     * @param OrganisationServiceInterface $organisationService
+     * @param BaseServiceInterface $organisationService
      */
-    public function __construct(OrganisationServiceInterface $organisationService)
+    public function __construct(BaseServiceInterface $organisationService)
     {
         $this->organisationService = $organisationService;
     }
