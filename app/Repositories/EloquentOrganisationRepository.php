@@ -2,6 +2,7 @@
 
 namespace App\Repositories;
 
+use App\Http\Resources\OrganisationResource;
 use App\Interfaces\Repositories\OrganisationRepositoryInterface;
 use App\Models\Organisation;
 
@@ -12,7 +13,8 @@ class EloquentOrganisationRepository implements OrganisationRepositoryInterface
      */
     public function getAll(): array
     {
-        return Organisation::all()->toArray();
+        $organisations = Organisation::all();
+        return OrganisationResource::collection($organisations)->resolve();
     }
 
     /**
@@ -22,7 +24,8 @@ class EloquentOrganisationRepository implements OrganisationRepositoryInterface
      */
     public function store(array $data): array
     {
-        return Organisation::create($data)->toArray();
+        $organisation = Organisation::create($data);
+        return OrganisationResource::make($organisation)->resolve();
     }
 
     /**
@@ -34,7 +37,7 @@ class EloquentOrganisationRepository implements OrganisationRepositoryInterface
     {
         $organisation = Organisation::find($id);
 
-        return is_null($organisation) ? null : $organisation->toArray();
+        return is_null($organisation) ? null : OrganisationResource::make($organisation)->resolve();
     }
 
     /**
@@ -48,7 +51,7 @@ class EloquentOrganisationRepository implements OrganisationRepositoryInterface
         $organisation = Organisation::find($id);
         $organisation->update($data);
 
-        return $organisation->toArray();
+        return OrganisationResource::make($organisation)->resolve();
     }
 
     /**
