@@ -100,9 +100,12 @@ class MediaService implements MediaServiceInterface
     {
         $thumbnail = Image::make($file);
 
-        $thumbnail->resize(360, 203, function ($constraint) {
-            $constraint->aspectRatio();
-        });
+        $thumbnail->resize(
+            env('MEDIA_THUMBNAIL_WIDTH', 360),
+            env('MEDIA_THUMBNAIL_HEIGHT', 203),
+            function ($constraint) {
+                $constraint->aspectRatio();
+            });
 
         $this->storage->put($path . '/' . $filename, $thumbnail->encode());
 

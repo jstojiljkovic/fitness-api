@@ -26,9 +26,7 @@ class StoreEquipmentRequest extends FormRequest
         return [
             'name' => 'required|string',
             'description' => 'required|string',
-            'photo' => 'file|image',
-            'organisation_id' => 'required|string',
-            'user_id' => 'required|string'
+            'photo' => 'required|file|image',
         ];
     }
 }

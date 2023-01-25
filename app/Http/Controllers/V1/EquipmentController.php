@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\V1;
 
+use App\Helpers\ApplicationHelper;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Equipment\StoreEquipmentRequest;
 use App\Http\Requests\Equipment\UpdateEquipmentRequest;
@@ -12,12 +13,19 @@ use Symfony\Component\HttpFoundation\Response;
 
 class EquipmentController extends Controller
 {
+    /**
+     * @var BaseServiceInterface
+     */
     protected BaseServiceInterface $equipmentService;
 
+    /**
+     * @var MediaServiceInterface
+     */
     protected MediaServiceInterface $mediaService;
 
     /**
      * @param BaseServiceInterface $equipmentService
+     * @param MediaServiceInterface $mediaService
      */
     public function __construct(BaseServiceInterface $equipmentService, MediaServiceInterface $mediaService)
     {
@@ -49,7 +57,7 @@ class EquipmentController extends Controller
     public function store(StoreEquipmentRequest $request): JsonResponse
     {
         $data = $request->validated();
-        $file = $this->mediaService->uploadPhoto($request->photo, Auth()->user()->organisation_id, true);
+        $file = $this->mediaService->uploadPhoto($request->photo, ApplicationHelper::activeOrganisation(), true);
         $data = array_merge($data, $file);
         $equipment = $this->equipmentService->store($data);
 
@@ -87,7 +95,7 @@ class EquipmentController extends Controller
     {
         $data = $request->validated();
         $equipment = $this->equipmentService->get($id);
-        $organisationId = Auth()->user()->organisation_id;
+        $organisationId = ApplicationHelper::activeOrganisation();
 
         if ($request->hasFile('photo')) {
             $file = $this->mediaService->overwritePhoto(
@@ -118,8 +126,11 @@ class EquipmentController extends Controller
     {
         $equipment = $this->equipmentService->get($id);
         $this->equipmentService->destroy($id);
-        $organisationId = Auth()->user()->organisation_id;
-        $this->mediaService->deletePhoto($organisationId . '/' . $equipment['filename'], $organisationId . '/' . $equipment['thumbnail']);
+        $organisationId = ApplicationHelper::activeOrganisation();
+        $this->mediaService->deletePhoto(
+            $organisationId . '/' . $equipment['filename'],
+            $organisationId . '/' . $equipment['thumbnail']
+        );
 
         return response()->noContent();
     }

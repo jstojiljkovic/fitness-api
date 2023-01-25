@@ -50,7 +50,7 @@ use Laravel\Passport\Token;
  * @method static Builder|User wherePassword( $value )
  * @method static Builder|User whereUpdatedAt( $value )
  * @mixin Eloquent
- * @property-read Collection|\App\Models\Equipment[] $equipments
+ * @property-read Collection|Equipment[] $equipments
  * @property-read int|null $equipments_count
  */
 class User extends Authenticatable

@@ -24,7 +24,9 @@ class UpdateEquipmentRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'sometimes|string'
+            'name' => 'sometimes|string',
+            'description' => 'sometimes|string',
+            'photo' => 'sometimes|file|image'
         ];
     }
 }
