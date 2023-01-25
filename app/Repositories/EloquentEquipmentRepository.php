@@ -2,6 +2,7 @@
 
 namespace App\Repositories;
 
+use App\Http\Resources\EquipmentResource;
 use App\Interfaces\Repositories\BaseRepositoryInterface;
 use App\Models\Equipment;
 
@@ -13,7 +14,8 @@ class EloquentEquipmentRepository implements BaseRepositoryInterface
      */
     public function getAll(): array
     {
-        return Equipment::all()->toArray();
+        $equipments = Equipment::all();
+        return EquipmentResource::collection($equipments)->resolve();
     }
 
     /**
@@ -23,7 +25,8 @@ class EloquentEquipmentRepository implements BaseRepositoryInterface
      */
     public function store(array $data): array
     {
-        return Equipment::create($data)->toArray();
+        $equipment = Equipment::create($data);
+        return EquipmentResource::make($equipment)->resolve();
     }
 
     /**
@@ -45,7 +48,7 @@ class EloquentEquipmentRepository implements BaseRepositoryInterface
     {
         $equipment = Equipment::find($id);
 
-        return is_null($equipment) ? null : $equipment->toArray();
+        return is_null($equipment) ? null : EquipmentResource::make($equipment)->resolve();
     }
 
     /**
@@ -59,7 +62,7 @@ class EloquentEquipmentRepository implements BaseRepositoryInterface
         $equipment = Equipment::find($id);
         $equipment->update($data);
 
-        return $equipment->toArray();
+        return EquipmentResource::make($equipment)->resolve();
     }
 
     /**
