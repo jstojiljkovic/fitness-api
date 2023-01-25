@@ -4,7 +4,6 @@ namespace App\Services;
 
 use App\Interfaces\Repositories\OrganisationRepositoryInterface;
 use App\Interfaces\Repositories\UserRepositoryInterface;
-use App\Interfaces\Services\OrganisationServiceInterface;
 use App\Interfaces\Services\UserServiceInterface;
 
 class UserService implements UserServiceInterface
