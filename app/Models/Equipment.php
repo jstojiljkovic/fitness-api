@@ -39,6 +39,7 @@ use Illuminate\Support\Carbon;
  * @method static Builder|Equipment whereOrganisationId( $value )
  * @method static Builder|Equipment whereThumbnail( $value )
  * @method static Builder|Equipment whereUserId( $value )
+ * @method static \Database\Factories\EquipmentFactory factory(...$parameters)
  */
 class Equipment extends Model
 {
