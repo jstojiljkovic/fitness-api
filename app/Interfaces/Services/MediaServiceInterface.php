@@ -40,7 +40,7 @@ interface MediaServiceInterface
      *
      * @return string
      */
-    public function uploadVideo(UploadedFile $file, string $path): string;
+    public function uploadVideo(UploadedFile $file, string $path): array;
 
     /**
      * @param string $path
@@ -48,4 +48,13 @@ interface MediaServiceInterface
      * @return void
      */
     public function deleteVideo(string $path): void;
+
+	/**
+	 * @param UploadedFile $file
+	 * @param string $oldPath
+	 * @param string $newPath
+	 *
+	 * @return array
+	 */
+	public function overwriteVideo(UploadedFile $file, string $oldPath, string $newPath):array ;
 }
