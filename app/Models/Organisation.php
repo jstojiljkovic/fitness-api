@@ -32,6 +32,8 @@ use Illuminate\Support\Carbon;
  * @method static Builder|Organisation whereUpdatedAt( $value )
  * @property-read Collection|Equipment[] $equipments
  * @property-read int|null $equipments_count
+ * @property-read Collection|\App\Models\Video[] $videos
+ * @property-read int|null $videos_count
  */
 class Organisation extends Model
 {
@@ -71,5 +73,15 @@ class Organisation extends Model
     public function equipments(): HasMany
     {
         return $this->hasMany(Equipment::class);
+    }
+
+    /**
+     * Get the equipments for the user
+     *
+     * @return HasMany
+     */
+    public function videos(): HasMany
+    {
+        return $this->hasMany(Video::class);
     }
 }

@@ -116,11 +116,13 @@ class MediaService implements MediaServiceInterface
      * @param UploadedFile $file
      * @param string $path
      *
-     * @return string
+     * @return array
      */
-    public function uploadVideo(UploadedFile $file, string $path): string
+    public function uploadVideo(UploadedFile $file, string $path): array
     {
-        return $this->upload($file, $path);
+        return [
+            'source' => $this->upload($file, $path)
+        ];
     }
 
     /**
@@ -131,5 +133,18 @@ class MediaService implements MediaServiceInterface
     public function deleteVideo(string $path): void
     {
         $this->storage->delete($path);
+    }
+
+    /**
+     * @param UploadedFile $file
+     * @param string $oldPath
+     * @param string $newPath
+     *
+     * @return array
+     */
+    public function overwriteVideo(UploadedFile $file, string $oldPath, string $newPath): array
+    {
+        $this->deleteVideo($oldPath);
+        return $this->uploadVideo($file, $newPath);
     }
 }

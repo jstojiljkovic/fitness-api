@@ -2,11 +2,11 @@
 
 namespace App\Repositories;
 
-use App\Http\Resources\EquipmentResource;
-use App\Interfaces\Repositories\EquipmentRepositoryInterface;
-use App\Models\Equipment;
+use App\Http\Resources\VideoResource;
+use App\Interfaces\Repositories\VideoRepositoryInterface;
+use App\Models\Video;
 
-class EloquentEquipmentRepository implements EquipmentRepositoryInterface
+class EloquentVideoRepository implements VideoRepositoryInterface
 {
 
     /**
@@ -14,8 +14,8 @@ class EloquentEquipmentRepository implements EquipmentRepositoryInterface
      */
     public function getAll(): array
     {
-        $equipments = Equipment::all();
-        return EquipmentResource::collection($equipments)->resolve();
+        $videos = Video::all();
+        return VideoResource::collection($videos)->resolve();
     }
 
     /**
@@ -25,8 +25,8 @@ class EloquentEquipmentRepository implements EquipmentRepositoryInterface
      */
     public function store(array $data): array
     {
-        $equipment = Equipment::create($data);
-        return EquipmentResource::make($equipment)->resolve();
+        $video = Video::create($data);
+        return VideoResource::make($video)->resolve();
     }
 
     /**
@@ -36,7 +36,7 @@ class EloquentEquipmentRepository implements EquipmentRepositoryInterface
      */
     public function exists(string $id): bool
     {
-        return Equipment::where('id', $id)->exists();
+        return Video::where('id', $id)->exists();
     }
 
     /**
@@ -46,9 +46,8 @@ class EloquentEquipmentRepository implements EquipmentRepositoryInterface
      */
     public function get(string $id): ?array
     {
-        $equipment = Equipment::find($id);
-
-        return is_null($equipment) ? null : EquipmentResource::make($equipment)->resolve();
+        $video = Video::find($id);
+        return is_null($video) ? null : VideoResource::make($video)->resolve();
     }
 
     /**
@@ -59,10 +58,9 @@ class EloquentEquipmentRepository implements EquipmentRepositoryInterface
      */
     public function update(string $id, array $data): array
     {
-        $equipment = Equipment::find($id);
-        $equipment->update($data);
-
-        return EquipmentResource::make($equipment)->resolve();
+        $video = Video::find($id);
+        $video->update($data);
+        return VideoResource::make($video)->resolve();
     }
 
     /**
@@ -72,6 +70,6 @@ class EloquentEquipmentRepository implements EquipmentRepositoryInterface
      */
     public function destroy(string $id): void
     {
-        Equipment::destroy($id);
+        Video::destroy($id);
     }
 }

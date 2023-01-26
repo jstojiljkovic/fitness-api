@@ -2,20 +2,20 @@
 
 namespace App\Services;
 
-use App\Interfaces\Services\BaseServiceInterface;
+use App\Interfaces\Services\OrganisationServiceInterface;
 
-class OrganisationService implements BaseServiceInterface
+class OrganisationService implements OrganisationServiceInterface
 {
 
     /**
-     * @var BaseServiceInterface
+     * @var OrganisationServiceInterface
      */
-    protected BaseServiceInterface $organisationRepository;
+    protected OrganisationServiceInterface $organisationRepository;
 
     /**
-     * @param BaseServiceInterface $organisationRepository
+     * @param OrganisationServiceInterface $organisationRepository
      */
-    public function __construct(BaseServiceInterface $organisationRepository)
+    public function __construct(OrganisationServiceInterface $organisationRepository)
     {
         $this->organisationRepository = $organisationRepository;
     }
