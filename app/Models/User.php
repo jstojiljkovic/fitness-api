@@ -52,7 +52,7 @@ use Laravel\Passport\Token;
  * @mixin Eloquent
  * @property-read Collection|Equipment[] $equipments
  * @property-read int|null $equipments_count
- * @property-read Collection|\App\Models\Video[] $videos
+ * @property-read Collection|Video[] $videos
  * @property-read int|null $videos_count
  */
 class User extends Authenticatable
