@@ -27,7 +27,12 @@ class UpdateVideoRequest extends FormRequest
             'name' => 'sometimes|string',
             'description' => 'sometimes|string',
             'photo' => 'sometimes|file|image',
-            'video' => 'sometimes|file|mimes:mp4,mov,ogg|max:90000'
+            'video' => 'sometimes|file|mimes:mp4,mov,ogg|max:90000',
+            'steps' => 'sometimes|array',
+            'steps.*.name' => 'required|string',
+            'steps.*.description' => 'required|string',
+            'steps.*.start' => 'required|numeric|between:0,999999999999.99',
+            'steps.*.end' => 'required|numeric|between:0,99999999999999.99',
         ];
     }
 }

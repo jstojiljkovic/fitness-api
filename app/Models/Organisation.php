@@ -32,7 +32,7 @@ use Illuminate\Support\Carbon;
  * @method static Builder|Organisation whereUpdatedAt( $value )
  * @property-read Collection|Equipment[] $equipments
  * @property-read int|null $equipments_count
- * @property-read Collection|\App\Models\Video[] $videos
+ * @property-read Collection|Video[] $videos
  * @property-read int|null $videos_count
  */
 class Organisation extends Model
@@ -76,7 +76,7 @@ class Organisation extends Model
     }
 
     /**
-     * Get the equipments for the user
+     * Get the equipments for the organisation
      *
      * @return HasMany
      */

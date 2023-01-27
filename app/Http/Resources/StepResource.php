@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 use JsonSerializable;
 
-class VideoResource extends JsonResource
+class StepResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -22,12 +22,8 @@ class VideoResource extends JsonResource
             'id' => $this->id,
             'name' => $this->name,
             'description' => $this->description,
-            'source' => $this->source,
-            'filename' => $this->filename,
-            'thumbnail' => $this->thumbnail,
-            'created_at' => DateTimeResource::make($this->created_at),
-            'updated_at' => DateTimeResource::make($this->updated_at),
-            'steps' => StepResource::collection($this->steps)
+            'start' => $this->start,
+            'end' => $this->end
         ];
     }
 }
