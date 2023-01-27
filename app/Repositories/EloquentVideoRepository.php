@@ -26,6 +26,7 @@ class EloquentVideoRepository implements VideoRepositoryInterface
     public function store(array $data): array
     {
         $video = Video::create($data);
+        $video->steps()->createMany($data['steps']);
         return VideoResource::make($video)->resolve();
     }
 
@@ -60,6 +61,12 @@ class EloquentVideoRepository implements VideoRepositoryInterface
     {
         $video = Video::find($id);
         $video->update($data);
+
+        if (isset($data['steps'])) {
+            $video->steps()->delete();
+            $video->steps()->createMany($data['steps']);
+        }
+
         return VideoResource::make($video)->resolve();
     }
 

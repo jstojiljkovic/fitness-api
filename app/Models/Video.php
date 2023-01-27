@@ -4,10 +4,15 @@ namespace App\Models;
 
 use App\Models\Scopes\OrganisationScope;
 use App\Traits\ApplyOrganisationUserTrait;
+use Eloquent;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Support\Carbon;
 
 /**
  * App\Models\Video
@@ -20,24 +25,26 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @property string $source
  * @property string $filename
  * @property string|null $thumbnail
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
- * @property-read \App\Models\Organisation $organisation
- * @property-read \App\Models\User $user
- * @method static \Illuminate\Database\Eloquent\Builder|Video newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|Video newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|Video query()
- * @method static \Illuminate\Database\Eloquent\Builder|Video whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Video whereDescription($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Video whereFilename($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Video whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Video whereName($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Video whereOrganisationId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Video whereSource($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Video whereThumbnail($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Video whereUpdatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Video whereUserId($value)
- * @mixin \Eloquent
+ * @property Carbon|null $created_at
+ * @property Carbon|null $updated_at
+ * @property-read Organisation $organisation
+ * @property-read User $user
+ * @method static Builder|Video newModelQuery()
+ * @method static Builder|Video newQuery()
+ * @method static Builder|Video query()
+ * @method static Builder|Video whereCreatedAt( $value )
+ * @method static Builder|Video whereDescription( $value )
+ * @method static Builder|Video whereFilename( $value )
+ * @method static Builder|Video whereId( $value )
+ * @method static Builder|Video whereName( $value )
+ * @method static Builder|Video whereOrganisationId( $value )
+ * @method static Builder|Video whereSource( $value )
+ * @method static Builder|Video whereThumbnail( $value )
+ * @method static Builder|Video whereUpdatedAt( $value )
+ * @method static Builder|Video whereUserId( $value )
+ * @mixin Eloquent
+ * @property-read Collection|Step[] $steps
+ * @property-read int|null $steps_count
  */
 class Video extends Model
 {
@@ -69,7 +76,7 @@ class Video extends Model
     }
 
     /**
-     * Get the organisation that owns the equipment
+     * Get the organisation that owns the video
      *
      * @return BelongsTo
      */
@@ -79,12 +86,22 @@ class Video extends Model
     }
 
     /**
-     * Get the user that owns the equipment
+     * Get the user that owns the video
      *
      * @return BelongsTo
      */
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
+    }
+
+    /**
+     * Get the steps for the video
+     *
+     * @return HasMany
+     */
+    public function steps(): HasMany
+    {
+        return $this->hasMany(Step::class);
     }
 }

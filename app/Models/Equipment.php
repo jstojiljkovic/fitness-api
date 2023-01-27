@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Models\Scopes\OrganisationScope;
 use App\Traits\ApplyOrganisationUserTrait;
+use Database\Factories\EquipmentFactory;
 use Eloquent;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
@@ -39,7 +40,7 @@ use Illuminate\Support\Carbon;
  * @method static Builder|Equipment whereOrganisationId( $value )
  * @method static Builder|Equipment whereThumbnail( $value )
  * @method static Builder|Equipment whereUserId( $value )
- * @method static \Database\Factories\EquipmentFactory factory(...$parameters)
+ * @method static EquipmentFactory factory( ...$parameters )
  */
 class Equipment extends Model
 {
