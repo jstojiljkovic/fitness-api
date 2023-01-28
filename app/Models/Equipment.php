@@ -7,10 +7,12 @@ use App\Traits\ApplyOrganisationUserTrait;
 use Database\Factories\EquipmentFactory;
 use Eloquent;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Support\Carbon;
 
 /**
@@ -41,6 +43,8 @@ use Illuminate\Support\Carbon;
  * @method static Builder|Equipment whereThumbnail( $value )
  * @method static Builder|Equipment whereUserId( $value )
  * @method static EquipmentFactory factory( ...$parameters )
+ * @property-read Collection|Workout[] $workouts
+ * @property-read int|null $workouts_count
  */
 class Equipment extends Model
 {
@@ -89,5 +93,15 @@ class Equipment extends Model
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
+    }
+
+    /**
+     * The workouts that belong to the equipment
+     *
+     * @return BelongsToMany
+     */
+    public function workouts(): BelongsToMany
+    {
+        return $this->belongsToMany(Workout::class);
     }
 }

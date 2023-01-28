@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 use JsonSerializable;
 
-class EquipmentResource extends JsonResource
+class WorkoutResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -22,8 +22,13 @@ class EquipmentResource extends JsonResource
             'id' => $this->id,
             'name' => $this->name,
             'description' => $this->description,
+            'duration' => $this->duration,
+            'intensity' => $this->intensity,
+            'level' => $this->level,
             'filename' => $this->filename,
             'thumbnail' => $this->thumbnail,
+            'video' => VideoResource::make($this->video),
+            'equipments' => EquipmentResource::collection($this->equipments),
             'created_at' => DateTimeResource::make($this->created_at),
             'updated_at' => DateTimeResource::make($this->updated_at),
         ];

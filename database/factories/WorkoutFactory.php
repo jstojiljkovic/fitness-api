@@ -2,14 +2,15 @@
 
 namespace Database\Factories;
 
-use App\Models\Model;
+use App\Models\Organisation;
+use App\Models\User;
 use App\Models\Video;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends Factory<Model>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Workout>
  */
-class StepFactory extends Factory
+class WorkoutFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -19,11 +20,14 @@ class StepFactory extends Factory
     public function definition()
     {
         return [
+            'organisation_id' => Organisation::factory(),
+            'user_id' => User::factory(),
             'video_id' => Video::factory(),
             'name' => fake()->words(5, true),
             'description' => fake()->text(),
-            'start' => fake()->randomFloat(25),
-            'end' => fake()->randomFloat(25)
+            'duration' => fake()->randomNumber(),
+            'filename' => fake()->imageUrl(),
+            'thumbnail' => fake()->imageUrl(),
         ];
     }
 }

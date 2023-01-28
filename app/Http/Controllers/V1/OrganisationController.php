@@ -31,7 +31,7 @@ class OrganisationController extends Controller
 
         return response()->json([
             'data' => $organisations
-        ], Response::HTTP_CREATED);
+        ], Response::HTTP_OK);
     }
 
     /**
@@ -47,7 +47,7 @@ class OrganisationController extends Controller
 
         return response()->json([
             'data' => $organisation
-        ], Response::HTTP_OK);
+        ], Response::HTTP_CREATED);
     }
 
     /**

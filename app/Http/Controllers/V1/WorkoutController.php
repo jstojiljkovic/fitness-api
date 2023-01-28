@@ -4,31 +4,30 @@ namespace App\Http\Controllers\V1;
 
 use App\Helpers\ApplicationHelper;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Video\StoreVideoRequest;
-use App\Http\Requests\Video\UpdateVideoRequest;
+use App\Http\Requests\Workout\StoreWorkoutRequest;
+use App\Http\Requests\Workout\UpdateWorkoutRequest;
 use App\Interfaces\Services\MediaServiceInterface;
-use App\Interfaces\Services\VideoServiceInterface;
+use App\Interfaces\Services\WorkoutServiceInterface;
 use Illuminate\Http\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 
-class VideoController extends Controller
+class WorkoutController extends Controller
 {
     /**
-     * @var VideoServiceInterface
+     * @var WorkoutServiceInterface
      */
-    protected VideoServiceInterface $videoService;
+    protected WorkoutServiceInterface $workoutService;
     /**
      * @var MediaServiceInterface
      */
     protected MediaServiceInterface $mediaService;
 
     /**
-     * @param VideoServiceInterface $videoService
-     * @param MediaServiceInterface $mediaService
+     * @param WorkoutServiceInterface $workoutService
      */
-    public function __construct(VideoServiceInterface $videoService, MediaServiceInterface $mediaService)
+    public function __construct(WorkoutServiceInterface $workoutService, MediaServiceInterface $mediaService)
     {
-        $this->videoService = $videoService;
+        $this->workoutService = $workoutService;
         $this->mediaService = $mediaService;
     }
 
@@ -39,30 +38,29 @@ class VideoController extends Controller
      */
     public function index(): JsonResponse
     {
-        $videos = $this->videoService->getAll();
+        $workouts = $this->workoutService->getAll();
 
         return response()->json([
-            'data' => $videos
+            'data' => $workouts
         ], Response::HTTP_OK);
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param StoreVideoRequest $request
+     * @param StoreWorkoutRequest $request
      *
      * @return JsonResponse
      */
-    public function store(StoreVideoRequest $request): JsonResponse
+    public function store(StoreWorkoutRequest $request): JsonResponse
     {
         $data = $request->validated();
         $photo = $this->mediaService->uploadPhoto($request->photo, ApplicationHelper::activeOrganisation(), true);
-        $video = $this->mediaService->uploadVideo($request->video, ApplicationHelper::activeOrganisation());
-        $data = array_merge($data, $photo, $video);
-        $video = $this->videoService->store($data);
+        $data = array_merge($data, $photo);
+        $workout = $this->workoutService->store($data);
 
         return response()->json([
-            'data' => $video
+            'data' => $workout
         ], Response::HTTP_CREATED);
     }
 
@@ -75,51 +73,42 @@ class VideoController extends Controller
      */
     public function show(string $id): JsonResponse
     {
-        $video = $this->videoService->get($id);
+        $workout = $this->workoutService->get($id);
 
         return response()->json([
-            'data' => $video
+            'data' => $workout
         ], Response::HTTP_OK);
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param UpdateVideoRequest $request
+     * @param UpdateWorkoutRequest $request
      * @param string $id
      *
      * @return JsonResponse
      */
-    public function update(UpdateVideoRequest $request, string $id): JsonResponse
+    public function update(UpdateWorkoutRequest $request, string $id): JsonResponse
     {
         $data = $request->validated();
-        $video = $this->videoService->get($id);
+        $workout = $this->workoutService->get($id);
         $organisationId = ApplicationHelper::activeOrganisation();
 
         if ($request->hasFile('photo')) {
             $file = $this->mediaService->overwritePhoto(
                 $request->photo,
-                $organisationId . '/' . $video['filename'],
+                $organisationId . '/' . $workout['filename'],
                 $organisationId,
                 true,
-                $organisationId . '/' . $video['thumbnail'],
+                $organisationId . '/' . $workout['thumbnail'],
             );
             $data = array_merge($data, $file);
         }
 
-        if ($request->hasFile('video')) {
-            $file = $this->mediaService->overwriteVideo(
-                $request->video,
-                $organisationId . '/' . $video['source'],
-                $organisationId,
-            );
-            $data = array_merge($data, $file);
-        }
-
-        $video = $this->videoService->update($id, $data);
+        $workout = $this->workoutService->update($id, $data);
 
         return response()->json([
-            'data' => $video
+            'data' => $workout
         ], Response::HTTP_OK);
     }
 
@@ -132,15 +121,12 @@ class VideoController extends Controller
      */
     public function destroy(string $id): Response
     {
-        $video = $this->videoService->get($id);
+        $workout = $this->workoutService->get($id);
         $organisationId = ApplicationHelper::activeOrganisation();
-        $this->videoService->destroy($id);
+        $this->workoutService->destroy($id);
         $this->mediaService->deletePhoto(
-            $organisationId . '/' . $video['filename'],
-            $organisationId . '/' . $video['thumbnail']
-        );
-        $this->mediaService->deleteVideo(
-            $organisationId . '/' . $video['source']
+            $organisationId . '/' . $workout['filename'],
+            $organisationId . '/' . $workout['thumbnail']
         );
 
         return response()->noContent();

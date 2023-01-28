@@ -44,7 +44,7 @@ class EquipmentController extends Controller
 
         return response()->json([
             'data' => $equipments
-        ], Response::HTTP_CREATED);
+        ], Response::HTTP_OK);
     }
 
     /**
@@ -63,7 +63,7 @@ class EquipmentController extends Controller
 
         return response()->json([
             'data' => $equipment
-        ], Response::HTTP_OK);
+        ], Response::HTTP_CREATED);
     }
 
     /**

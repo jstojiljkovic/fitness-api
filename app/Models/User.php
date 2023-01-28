@@ -54,6 +54,8 @@ use Laravel\Passport\Token;
  * @property-read int|null $equipments_count
  * @property-read Collection|Video[] $videos
  * @property-read int|null $videos_count
+ * @property-read Collection|Workout[] $workouts
+ * @property-read int|null $workouts_count
  */
 class User extends Authenticatable
 {
@@ -109,5 +111,15 @@ class User extends Authenticatable
     public function videos(): HasMany
     {
         return $this->hasMany(Video::class);
+    }
+
+    /**
+     * Get the workouts for the user
+     *
+     * @return HasMany
+     */
+    public function workouts(): HasMany
+    {
+        return $this->hasMany(Workout::class);
     }
 }

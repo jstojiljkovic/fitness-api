@@ -34,6 +34,8 @@ use Illuminate\Support\Carbon;
  * @property-read int|null $equipments_count
  * @property-read Collection|Video[] $videos
  * @property-read int|null $videos_count
+ * @property-read Collection|Workout[] $workouts
+ * @property-read int|null $workouts_count
  */
 class Organisation extends Model
 {
@@ -76,12 +78,22 @@ class Organisation extends Model
     }
 
     /**
-     * Get the equipments for the organisation
+     * Get the videos for the organisation
      *
      * @return HasMany
      */
     public function videos(): HasMany
     {
         return $this->hasMany(Video::class);
+    }
+
+    /**
+     * Get the workouts for the organisation
+     *
+     * @return HasMany
+     */
+    public function workouts(): HasMany
+    {
+        return $this->hasMany(Workout::class);
     }
 }
