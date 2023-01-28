@@ -36,6 +36,6 @@ class LoginController
         return response()->json([
             'data' => [],
             'token' => $token,
-        ], Response::HTTP_CREATED);
+        ], Response::HTTP_OK);
     }
 }

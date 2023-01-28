@@ -45,6 +45,9 @@ use Illuminate\Support\Carbon;
  * @mixin Eloquent
  * @property-read Collection|Step[] $steps
  * @property-read int|null $steps_count
+ * @property-read Collection|Workout[] $workouts
+ * @property-read int|null $workouts_count
+ * @method static \Database\Factories\VideoFactory factory(...$parameters)
  */
 class Video extends Model
 {
@@ -93,6 +96,16 @@ class Video extends Model
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
+    }
+
+    /**
+     * Get the workouts for the video
+     *
+     * @return HasMany
+     */
+    public function workouts(): HasMany
+    {
+        return $this->hasMany(Workout::class);
     }
 
     /**

@@ -1,10 +1,13 @@
 <?php
 
-namespace App\Http\Requests\Video;
+namespace App\Http\Requests\Workout;
 
+use App\Enums\WorkoutIntensity;
+use App\Enums\WorkoutLevel;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rules\Enum;
 
-class StoreVideoRequest extends FormRequest
+class StoreWorkoutRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -26,13 +29,12 @@ class StoreVideoRequest extends FormRequest
         return [
             'name' => 'required|string',
             'description' => 'required|string',
+            'video_id' => 'required|string|exists:video,id',
             'photo' => 'required|file|image',
-            'video' => 'required|file|mimes:mp4,mov,ogg|max:90000',
-            'steps' => 'required|array',
-            'steps.*.name' => 'required|string',
-            'steps.*.description' => 'required|string',
-            'steps.*.start' => 'required|string|between:0,999999999999.99',
-            'steps.*.end' => 'required|string|between:0,99999999999999.99',
+            'equipments' => 'sometimes|array|exists:equipment,id',
+            'intensity' => ['required', 'numeric', new Enum(WorkoutIntensity::class)],
+            'level' => ['required', 'numeric', new Enum(WorkoutLevel::class)],
+            'duration' => 'required|numeric'
         ];
     }
 }
