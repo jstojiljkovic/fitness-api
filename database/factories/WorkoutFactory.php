@@ -2,6 +2,9 @@
 
 namespace Database\Factories;
 
+use App\Models\Organisation;
+use App\Models\User;
+use App\Models\Video;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -17,7 +20,14 @@ class WorkoutFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'organisation_id' => Organisation::factory(),
+            'user_id' => User::factory(),
+            'video_id' => Video::factory(),
+            'name' => fake()->words(5, true),
+            'description' => fake()->text(),
+            'duration' => fake()->randomNumber(),
+            'filename' => fake()->imageUrl(),
+            'thumbnail' => fake()->imageUrl(),
         ];
     }
 }

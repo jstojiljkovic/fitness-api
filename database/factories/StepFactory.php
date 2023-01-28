@@ -20,10 +20,10 @@ class StepFactory extends Factory
     {
         return [
             'video_id' => Video::factory(),
-            'name' => fake()->name(),
+            'name' => fake()->words(5, true),
             'description' => fake()->text(),
-            'start' => fake()->randomFloat(),
-            'end' => fake()->randomFloat()
+            'start' => fake()->randomFloat(25),
+            'end' => fake()->randomFloat(25)
         ];
     }
 }

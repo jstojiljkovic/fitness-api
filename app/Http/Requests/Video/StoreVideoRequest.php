@@ -31,8 +31,8 @@ class StoreVideoRequest extends FormRequest
             'steps' => 'required|array',
             'steps.*.name' => 'required|string',
             'steps.*.description' => 'required|string',
-            'steps.*.start' => 'required|numeric|between:0,999999999999.99',
-            'steps.*.end' => 'required|numeric|between:0,99999999999999.99',
+            'steps.*.start' => 'required|string|between:0,999999999999.99',
+            'steps.*.end' => 'required|string|between:0,99999999999999.99',
         ];
     }
 }

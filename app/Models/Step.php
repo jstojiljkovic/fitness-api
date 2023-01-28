@@ -69,6 +69,11 @@ class Step extends Model
     ];
 
     /**
+     * @var bool
+     */
+    public $timestamps = false;
+
+    /**
      * Get the video that owns the step
      *
      * @return BelongsTo

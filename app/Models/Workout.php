@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use App\Enums\WorkoutIntensity;
+use App\Enums\WorkoutLevel;
 use App\Models\Scopes\OrganisationScope;
 use App\Traits\ApplyOrganisationUserTrait;
 use Database\Factories\WorkoutFactory;
@@ -27,6 +29,26 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
  * @method static Builder|Workout newQuery()
  * @method static Builder|Workout query()
  * @mixin Eloquent
+ * @property string $id
+ * @property string $organisation_id
+ * @property string $user_id
+ * @property string $video_id
+ * @property string $name
+ * @property string $description
+ * @property string $filename
+ * @property string $thumbnail
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @method static Builder|Workout whereCreatedAt($value)
+ * @method static Builder|Workout whereDescription($value)
+ * @method static Builder|Workout whereFilename($value)
+ * @method static Builder|Workout whereId($value)
+ * @method static Builder|Workout whereName($value)
+ * @method static Builder|Workout whereOrganisationId($value)
+ * @method static Builder|Workout whereThumbnail($value)
+ * @method static Builder|Workout whereUpdatedAt($value)
+ * @method static Builder|Workout whereUserId($value)
+ * @method static Builder|Workout whereVideoId($value)
  */
 class Workout extends Model
 {
@@ -46,7 +68,16 @@ class Workout extends Model
      */
     protected $fillable = [
         'organisation_id', 'user_id', 'video_id', 'name',
-        'description', 'filename', 'thumbnail'
+        'description', 'filename', 'thumbnail', 'intensity',
+        'level', 'duration'
+    ];
+
+    /**
+     * @var string[]
+     */
+    protected $casts = [
+        'intensity' => WorkoutIntensity::class,
+        'level' => WorkoutLevel::class
     ];
 
     /**

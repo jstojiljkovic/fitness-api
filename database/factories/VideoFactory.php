@@ -2,22 +2,21 @@
 
 namespace Database\Factories;
 
-use App\Models\Equipment;
 use App\Models\Organisation;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends Factory<Equipment>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Video>
  */
-class EquipmentFactory extends Factory
+class VideoFactory extends Factory
 {
     /**
      * Define the model's default state.
      *
      * @return array<string, mixed>
      */
-    public function definition(): array
+    public function definition()
     {
         return [
             'organisation_id' => Organisation::factory(),
@@ -25,6 +24,7 @@ class EquipmentFactory extends Factory
             'name' => fake()->words(5, true),
             'description' => fake()->text(),
             'filename' => fake()->imageUrl(),
+            'source' => fake()->words(15, true),
             'thumbnail' => fake()->imageUrl(),
         ];
     }

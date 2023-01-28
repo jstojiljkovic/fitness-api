@@ -20,8 +20,8 @@ return new class extends Migration
                 ->onDelete('cascade');
             $table->string('name');
             $table->string('description');
-            $table->decimal('start', 25,20);
-            $table->decimal('end', 25,20);
+            $table->string('start');
+            $table->string('end');
         });
     }
 

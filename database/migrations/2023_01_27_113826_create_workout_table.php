@@ -23,6 +23,9 @@ return new class extends Migration
                 ->constrained('video');
             $table->string('name');
             $table->string('description');
+            $table->integer('duration');
+            $table->integer('intensity')->default(0);
+            $table->integer('level')->default(0);
             $table->string('filename');
             $table->string('thumbnail');
             $table->timestamps();

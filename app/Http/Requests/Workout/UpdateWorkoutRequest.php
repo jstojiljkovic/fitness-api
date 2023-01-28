@@ -2,7 +2,10 @@
 
 namespace App\Http\Requests\Workout;
 
+use App\Enums\WorkoutIntensity;
+use App\Enums\WorkoutLevel;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rules\Enum;
 
 class UpdateWorkoutRequest extends FormRequest
 {
@@ -29,6 +32,9 @@ class UpdateWorkoutRequest extends FormRequest
             'video_id' => 'sometimes|string|exists:video,id',
             'photo' => 'sometimes|file|image',
             'equipments' => 'sometimes|array|exists:equipment,id',
+            'intensity' => ['sometimes', 'numeric', new Enum(WorkoutIntensity::class)],
+            'level' => ['sometimes', 'numeric', new Enum(WorkoutLevel::class)],
+            'duration' => 'sometimes|numeric'
         ];
     }
 }
