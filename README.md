@@ -4,7 +4,7 @@ A smart digital api management solution for modern fitness entrepreneurs and per
 
 You can create follow up video content for every workout in your Fitness center. Depending on a video you can specify steps that closely follow everything you do. This could be a great solution for personal trainers allowing their users to inspect and practise certain routines at home.
 
-Our solutions helps you to make instructions videos available to your clients so that you can simplify your work during the fitness sessions. We also offer a database with instruction videos you can use.
+This API helps you to make instructions videos available to your clients so that you can simplify your work during the fitness sessions. We also offer a database with instruction videos you can use.
 
 ### TODO
 - [x] Create v1 of ERD
