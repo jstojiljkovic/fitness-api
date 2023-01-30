@@ -18,12 +18,14 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:api')->prefix('v1')->group(static function () {
+Route::middleware(['auth:api', 'employee'])->prefix('v1')->group(static function () {
     //TODO Access to this will go through CMS
     // Route::apiResource('organisations', OrganisationController::class);
-    Route::apiResource('equipments', EquipmentController::class);
-    Route::apiResource('videos', VideoController::class);
-    Route::apiResource('workouts', WorkoutController::class);
+    Route::apiResources([
+        'equipments' => EquipmentController::class,
+        'videos' => VideoController::class,
+        'workouts' => WorkoutController::class
+    ]);
 });
 
 Route::prefix('/v1')->group(static function () {
