@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Enums\Role;
 use App\Models\Equipment;
 use App\Models\Organisation;
 use App\Models\Step;
@@ -23,7 +24,8 @@ class DatabaseSeeder extends Seeder
         $organisation = Organisation::factory()->create();
         $user = User::factory()->create([
             'organisation_id' => $organisation->id,
-            'email' => 'admin@graphene.com'
+            'email' => 'admin@graphene.com',
+            'role' => Role::ADMIN
         ]);
         $data = [
             'organisation_id' => $organisation->id,

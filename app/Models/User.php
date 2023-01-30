@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Enums\Role;
 use Database\Factories\UserFactory;
 use Eloquent;
 use Illuminate\Database\Eloquent\Builder;
@@ -81,6 +82,13 @@ class User extends Authenticatable
      */
     protected $hidden = [
         'password',
+    ];
+
+    /**
+     * @var string[]
+     */
+    protected $casts = [
+        'role' => Role::class,
     ];
 
     /**
