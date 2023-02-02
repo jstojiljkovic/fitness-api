@@ -13,7 +13,7 @@ trait ApplyOrganisationUserTrait
      */
     public static function bootApplyOrganisationUserTrait(): void
     {
-        if (is_null(Auth::user())) {
+        if (! Auth::check()) {
             return;
         }
 

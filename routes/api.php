@@ -4,6 +4,7 @@ use App\Http\Controllers\V1\Auth\LoginController;
 use App\Http\Controllers\V1\Auth\RegisterController;
 use App\Http\Controllers\V1\EquipmentController;
 use App\Http\Controllers\V1\VideoController;
+use App\Http\Controllers\V1\WorkHourController;
 use App\Http\Controllers\V1\WorkoutController;
 use Illuminate\Support\Facades\Route;
 
@@ -18,7 +19,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware(['auth:api', 'employee'])->prefix('v1')->group(static function () {
+Route::middleware([ 'auth:api', 'employee' ])->prefix('v1')->group(static function () {
     //TODO Access to this will go through CMS
     // Route::apiResource('organisations', OrganisationController::class);
     Route::apiResources([
@@ -26,6 +27,8 @@ Route::middleware(['auth:api', 'employee'])->prefix('v1')->group(static function
         'videos' => VideoController::class,
         'workouts' => WorkoutController::class
     ]);
+    Route::apiResource('work-hours', WorkHourController::class)
+        ->only([ 'index', 'store', 'update' ]);
 });
 
 Route::prefix('/v1')->group(static function () {

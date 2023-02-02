@@ -2,7 +2,7 @@
 
 namespace App\Http\Middleware;
 
-use App\Enums\Role;
+use App\Enums\RoleEnum;
 use Closure;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -21,7 +21,7 @@ class EnsureUserIsAdmin
     public function handle(Request $request, Closure $next): \Illuminate\Http\Response|RedirectResponse
     {
         abort_unless(
-            Auth()->user()->role === Role::ADMIN,
+            Auth()->user()->role === RoleEnum::ADMIN,
             Response::HTTP_FORBIDDEN,
             'You dont have correct permission to access this.'
         );
