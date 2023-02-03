@@ -2,8 +2,8 @@
 
 namespace App\Http\Requests\Workout;
 
-use App\Enums\WorkoutIntensity;
-use App\Enums\WorkoutLevel;
+use App\Enums\WorkoutIntensityEnum;
+use App\Enums\WorkoutLevelEnum;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rules\Enum;
 
@@ -32,8 +32,8 @@ class StoreWorkoutRequest extends FormRequest
             'video_id' => 'required|string|exists:video,id',
             'photo' => 'required|file|image',
             'equipments' => 'sometimes|array|exists:equipment,id',
-            'intensity' => ['required', 'numeric', new Enum(WorkoutIntensity::class)],
-            'level' => ['required', 'numeric', new Enum(WorkoutLevel::class)],
+            'intensity' => ['required', 'numeric', new Enum(WorkoutIntensityEnum::class)],
+            'level' => ['required', 'numeric', new Enum(WorkoutLevelEnum::class)],
             'duration' => 'required|numeric'
         ];
     }

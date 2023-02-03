@@ -52,12 +52,15 @@ class Step extends Model
     use HasFactory, HasUuids;
 
     /**
+     * @var bool
+     */
+    public $timestamps = false;
+    /**
      * The table associated with the model.
      *
      * @var string
      */
     protected $table = 'step';
-
     /**
      * The attributes that are mass assignable.
      *
@@ -67,11 +70,6 @@ class Step extends Model
         'video_id', 'name',
         'description', 'start', 'end'
     ];
-
-    /**
-     * @var bool
-     */
-    public $timestamps = false;
 
     /**
      * Get the video that owns the step

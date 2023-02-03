@@ -2,7 +2,7 @@
 
 namespace App\Enums;
 
-enum WorkoutLevel: int
+enum WorkoutLevelEnum: int
 {
     case BEGINNER = 0;
     case INTERMEDIATE = 1;

@@ -17,7 +17,7 @@ This API helps you to make instructions videos available to your clients so that
 
 ### v1 ERD
 
-![image](https://user-images.githubusercontent.com/22980168/216065591-b9a906ce-2891-4052-a939-50af910852cf.png)
+![fitness-api drawio (2)](https://user-images.githubusercontent.com/22980168/216581867-a9a21fa1-7081-4575-ade1-80abb72b59d2.png)
 
 ### Onion Architecture
 Domain entities are the core and centre part. Onion architecture is built on a domain model in which layers are connected through interfaces. 
