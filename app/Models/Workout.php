@@ -2,8 +2,8 @@
 
 namespace App\Models;
 
-use App\Enums\WorkoutIntensity;
-use App\Enums\WorkoutLevel;
+use App\Enums\WorkoutIntensityEnum;
+use App\Enums\WorkoutLevelEnum;
 use App\Models\Scopes\OrganisationScope;
 use App\Traits\ApplyOrganisationUserTrait;
 use Database\Factories\WorkoutFactory;
@@ -15,6 +15,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Support\Carbon;
 
 /**
  * App\Models\Workout
@@ -37,18 +38,24 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
  * @property string $description
  * @property string $filename
  * @property string $thumbnail
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
- * @method static Builder|Workout whereCreatedAt($value)
- * @method static Builder|Workout whereDescription($value)
- * @method static Builder|Workout whereFilename($value)
- * @method static Builder|Workout whereId($value)
- * @method static Builder|Workout whereName($value)
- * @method static Builder|Workout whereOrganisationId($value)
- * @method static Builder|Workout whereThumbnail($value)
- * @method static Builder|Workout whereUpdatedAt($value)
- * @method static Builder|Workout whereUserId($value)
- * @method static Builder|Workout whereVideoId($value)
+ * @property Carbon|null $created_at
+ * @property Carbon|null $updated_at
+ * @method static Builder|Workout whereCreatedAt( $value )
+ * @method static Builder|Workout whereDescription( $value )
+ * @method static Builder|Workout whereFilename( $value )
+ * @method static Builder|Workout whereId( $value )
+ * @method static Builder|Workout whereName( $value )
+ * @method static Builder|Workout whereOrganisationId( $value )
+ * @method static Builder|Workout whereThumbnail( $value )
+ * @method static Builder|Workout whereUpdatedAt( $value )
+ * @method static Builder|Workout whereUserId( $value )
+ * @method static Builder|Workout whereVideoId( $value )
+ * @property int $duration
+ * @property WorkoutIntensityEnum $intensity
+ * @property WorkoutLevelEnum $level
+ * @method static Builder|Workout whereDuration( $value )
+ * @method static Builder|Workout whereIntensity( $value )
+ * @method static Builder|Workout whereLevel( $value )
  */
 class Workout extends Model
 {
@@ -76,8 +83,8 @@ class Workout extends Model
      * @var string[]
      */
     protected $casts = [
-        'intensity' => WorkoutIntensity::class,
-        'level' => WorkoutLevel::class
+        'intensity' => WorkoutIntensityEnum::class,
+        'level' => WorkoutLevelEnum::class
     ];
 
     /**

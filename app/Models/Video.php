@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Models\Scopes\OrganisationScope;
 use App\Traits\ApplyOrganisationUserTrait;
+use Database\Factories\VideoFactory;
 use Eloquent;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
@@ -47,7 +48,7 @@ use Illuminate\Support\Carbon;
  * @property-read int|null $steps_count
  * @property-read Collection|Workout[] $workouts
  * @property-read int|null $workouts_count
- * @method static \Database\Factories\VideoFactory factory(...$parameters)
+ * @method static VideoFactory factory( ...$parameters )
  */
 class Video extends Model
 {

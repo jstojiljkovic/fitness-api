@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\Interfaces\Services\MediaServiceInterface;
 use Illuminate\Contracts\Filesystem\Filesystem;
+use Illuminate\Filesystem\FilesystemAdapter;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\ImageManagerStatic as Image;
@@ -11,7 +12,10 @@ use Symfony\Component\HttpFoundation\File\File as IlluminateFile;
 
 class MediaService implements MediaServiceInterface
 {
-    protected Filesystem $storage;
+    /**
+     * @var Filesystem|FilesystemAdapter
+     */
+    protected Filesystem|FilesystemAdapter $storage;
 
     public function __construct()
     {
@@ -114,15 +118,15 @@ class MediaService implements MediaServiceInterface
 
     /**
      * @param UploadedFile $file
-     * @param string $path
+     * @param string $oldPath
+     * @param string $newPath
      *
      * @return array
      */
-    public function uploadVideo(UploadedFile $file, string $path): array
+    public function overwriteVideo(UploadedFile $file, string $oldPath, string $newPath): array
     {
-        return [
-            'source' => $this->upload($file, $path)
-        ];
+        $this->deleteVideo($oldPath);
+        return $this->uploadVideo($file, $newPath);
     }
 
     /**
@@ -137,14 +141,14 @@ class MediaService implements MediaServiceInterface
 
     /**
      * @param UploadedFile $file
-     * @param string $oldPath
-     * @param string $newPath
+     * @param string $path
      *
      * @return array
      */
-    public function overwriteVideo(UploadedFile $file, string $oldPath, string $newPath): array
+    public function uploadVideo(UploadedFile $file, string $path): array
     {
-        $this->deleteVideo($oldPath);
-        return $this->uploadVideo($file, $newPath);
+        return [
+            'source' => $this->upload($file, $path)
+        ];
     }
 }

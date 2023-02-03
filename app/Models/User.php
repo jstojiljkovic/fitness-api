@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use App\Enums\Role;
+use App\Enums\RoleEnum;
 use Database\Factories\UserFactory;
 use Eloquent;
 use Illuminate\Database\Eloquent\Builder;
@@ -57,6 +57,10 @@ use Laravel\Passport\Token;
  * @property-read int|null $videos_count
  * @property-read Collection|Workout[] $workouts
  * @property-read int|null $workouts_count
+ * @property RoleEnum $role
+ * @property-read Collection|WorkHour[] $workhours
+ * @property-read int|null $workhours_count
+ * @method static Builder|User whereRole( $value )
  */
 class User extends Authenticatable
 {
@@ -88,7 +92,7 @@ class User extends Authenticatable
      * @var string[]
      */
     protected $casts = [
-        'role' => Role::class,
+        'role' => RoleEnum::class,
     ];
 
     /**
@@ -129,5 +133,15 @@ class User extends Authenticatable
     public function workouts(): HasMany
     {
         return $this->hasMany(Workout::class);
+    }
+
+    /**
+     * Get the work-hours for the user
+     *
+     * @return HasMany
+     */
+    public function workHours(): HasMany
+    {
+        return $this->hasMany(WorkHour::class);
     }
 }

@@ -2,20 +2,20 @@
 
 namespace App\Services;
 
+use App\Interfaces\Repositories\EquipmentRepositoryInterface;
 use App\Interfaces\Services\EquipmentServiceInterface;
-use App\Repositories\EloquentEquipmentRepository;
 
 class EquipmentService implements EquipmentServiceInterface
 {
     /**
-     * @var EloquentEquipmentRepository
+     * @var EquipmentRepositoryInterface
      */
-    protected EloquentEquipmentRepository $equipmentRepository;
+    protected EquipmentRepositoryInterface $equipmentRepository;
 
     /**
-     * @param EloquentEquipmentRepository $equipmentRepository
+     * @param EquipmentRepositoryInterface $equipmentRepository
      */
-    public function __construct(EloquentEquipmentRepository $equipmentRepository)
+    public function __construct(EquipmentRepositoryInterface $equipmentRepository)
     {
         $this->equipmentRepository = $equipmentRepository;
     }

@@ -2,7 +2,7 @@
 
 namespace App\Enums;
 
-enum WorkoutIntensity: int
+enum WorkoutIntensityEnum: int
 {
     case LOW_INTENSITY = 0;
     case MEDIUM_INTENSITY = 1;

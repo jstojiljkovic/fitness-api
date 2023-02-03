@@ -96,4 +96,14 @@ class Organisation extends Model
     {
         return $this->hasMany(Workout::class);
     }
+
+    /**
+     * Get the work-hours for the organisation
+     *
+     * @return HasMany
+     */
+    public function workHours(): HasMany
+    {
+        return $this->hasMany(WorkHour::class);
+    }
 }
