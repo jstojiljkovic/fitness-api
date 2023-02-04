@@ -106,4 +106,14 @@ class Organisation extends Model
     {
         return $this->hasMany(WorkHour::class);
     }
+
+    /**
+     * Get the sessions for the organisation
+     *
+     * @return HasMany
+     */
+    public function sessions(): HasMany
+    {
+        return $this->hasMany(Session::class);
+    }
 }

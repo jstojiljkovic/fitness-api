@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\DatabaseNotification;
@@ -143,5 +144,25 @@ class User extends Authenticatable
     public function workHours(): HasMany
     {
         return $this->hasMany(WorkHour::class);
+    }
+
+    /**
+     * Get the sessions that user created
+     *
+     * @return HasMany
+     */
+    public function ownedSessions(): HasMany
+    {
+        return $this->hasMany(Session::class);
+    }
+
+    /**
+     * The sessions user has joined
+     *
+     * @return BelongsToMany
+     */
+    public function joinedSessions(): BelongsToMany
+    {
+        return $this->belongsToMany(Session::class);
     }
 }
