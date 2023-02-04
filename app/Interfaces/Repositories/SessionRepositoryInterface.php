@@ -39,7 +39,7 @@ interface SessionRepositoryInterface
      *
      * @return void
      */
-    public function joinGroup(string $id): void;
+    public function join(string $id): void;
 
     /**
      * @param string $id
@@ -48,4 +48,27 @@ interface SessionRepositoryInterface
      * @return void
      */
     public function changeStatus(string $id, string $status): void;
+
+    /**
+     * @param string $date
+     * @param string $start
+     * @param string $end
+     *
+     * @return bool
+     */
+    public function isScheduled(string $date, string $start, string $end): bool;
+
+    /**
+     * @param string $id
+     *
+     * @return bool
+     */
+    public function isJoined(string $id): bool;
+
+    /**
+     * @param string $id
+     *
+     * @return array
+     */
+    public function get(string $id): array;
 }

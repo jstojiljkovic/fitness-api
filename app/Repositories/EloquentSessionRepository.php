@@ -59,7 +59,7 @@ class EloquentSessionRepository implements SessionRepositoryInterface
      *
      * @return void
      */
-    public function joinGroup(string $id): void
+    public function join(string $id): void
     {
         $session = Session::find($id);
         $session->users()->attach(ApplicationHelper::activeUser());
@@ -87,6 +87,46 @@ class EloquentSessionRepository implements SessionRepositoryInterface
     {
         $session = Session::find($id);
         $session->update($data);
+
+        return SessionResource::make($session)->resolve();
+    }
+
+    /**
+     * @param string $date
+     * @param string $start
+     * @param string $end
+     *
+     * @return bool
+     */
+    public function isScheduled(string $date, string $start, string $end): bool
+    {
+        return Session::where('date', $date)
+            ->where('start', $start)
+            ->where('end', $end)
+            ->exists();
+    }
+
+    /**
+     * @param string $id
+     *
+     * @return bool
+     */
+    public function isJoined(string $id): bool
+    {
+        return Session::where('id', $id)
+            ->whereHas('users', function ($query) {
+                $query->where('id', ApplicationHelper::activeUser());
+            })->exists();
+    }
+
+    /**
+     * @param string $id
+     *
+     * @return array
+     */
+    public function get(string $id): array
+    {
+        $session = Session::find($id);
 
         return SessionResource::make($session)->resolve();
     }

@@ -3,6 +3,7 @@
 use App\Http\Controllers\V1\Auth\LoginController;
 use App\Http\Controllers\V1\Auth\RegisterController;
 use App\Http\Controllers\V1\EquipmentController;
+use App\Http\Controllers\V1\SessionController;
 use App\Http\Controllers\V1\VideoController;
 use App\Http\Controllers\V1\WorkHourController;
 use App\Http\Controllers\V1\WorkoutController;
@@ -19,16 +20,33 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware([ 'auth:api', 'employee' ])->prefix('v1')->group(static function () {
+Route::middleware('auth:api')->prefix('v1')->group(static function () {
     //TODO Access to this will go through CMS
     // Route::apiResource('organisations', OrganisationController::class);
-    Route::apiResources([
-        'equipments' => EquipmentController::class,
-        'videos' => VideoController::class,
-        'workouts' => WorkoutController::class
-    ]);
-    Route::apiResource('work-hours', WorkHourController::class)
-        ->only([ 'index', 'store', 'update' ]);
+
+    Route::middleware('employee')->group(static function() {
+        Route::apiResources([
+            'equipments' => EquipmentController::class,
+            'videos' => VideoController::class,
+            'workouts' => WorkoutController::class
+        ]);
+        Route::apiResource('work-hours', WorkHourController::class)
+            ->only([ 'index', 'store', 'update' ]);
+
+        Route::controller(SessionController::class)
+            ->prefix('sessions')
+            ->group(static function () {
+                Route::get('', 'index');
+                Route::post('/group', 'storeGroup');
+            });
+    });
+
+    Route::controller(SessionController::class)
+        ->prefix('sessions')
+        ->group(static function () {
+            Route::post('/individual', 'storeIndividual');
+            Route::post('/join-group', 'joinGroup');
+        });
 });
 
 Route::prefix('/v1')->group(static function () {

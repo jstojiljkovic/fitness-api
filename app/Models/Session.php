@@ -29,8 +29,8 @@ class Session extends Model
      */
     protected $fillable = [
         'workout_id', 'organisation_id', 'created_by',
-        'scheduled', 'start', 'end', 'status',
-        'capacity', 'used', 'remark'
+        'date', 'start', 'end', 'status',
+        'capacity', 'used', 'remark', 'user_id'
     ];
 
     /**
@@ -38,6 +38,16 @@ class Session extends Model
      */
     protected $casts = [
         'status' => SessionStatusEnum::class,
+    ];
+
+    /**
+     * @var array
+     */
+    protected $attributes = [
+        'status' => SessionStatusEnum::PENDING,
+        'capacity' => 1,
+        'used' => 0,
+        'remark' => ''
     ];
 
     /**

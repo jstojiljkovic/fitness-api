@@ -20,16 +20,16 @@ return new class extends Migration {
             $table->foreignUuid('organisation_id')
                 ->constrained('organisation')
                 ->onDelete('cascade');
-            $table->foreignUuid('used_id')
+            $table->foreignUuid('user_id')
                 ->constrained('users')
                 ->onDelete('cascade');
-            $table->date('scheduled');
+            $table->date('date');
             $table->time('start');
             $table->time('end');
             $table->string('status')->default('pending');
-            $table->tinyInteger('capacity');
-            $table->tinyInteger('used');
-            $table->text('remark')->nullable();
+            $table->tinyInteger('capacity')->default(1);
+            $table->tinyInteger('used')->default(0);
+            $table->string('remark',200)->default('');
             $table->timestamps();
         });
     }
