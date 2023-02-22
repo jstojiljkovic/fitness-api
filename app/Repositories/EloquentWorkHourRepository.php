@@ -26,9 +26,7 @@ class EloquentWorkHourRepository implements WorkHourRepositoryInterface
 
         WorkHour::insert($data);
 
-        $workHours = $this->get();
-
-        return WorkHourResource::collection($workHours)->resolve();
+        return $this->get();
     }
 
     /**
@@ -73,7 +71,7 @@ class EloquentWorkHourRepository implements WorkHourRepositoryInterface
     public function created(): bool
     {
         $workHours = WorkHour::where('user_id', ApplicationHelper::activeUser())
-            ->whereIn('id', WorkHourConstant::DAYS_IN_WEEK)->count();
+            ->whereIn('day', WorkHourConstant::DAYS_IN_WEEK)->count();
 
         return count(WorkHourConstant::DAYS_IN_WEEK) === $workHours;
     }
