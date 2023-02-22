@@ -3,6 +3,7 @@
 use App\Http\Controllers\V1\Auth\LoginController;
 use App\Http\Controllers\V1\Auth\RegisterController;
 use App\Http\Controllers\V1\EquipmentController;
+use App\Http\Controllers\V1\ScheduleController;
 use App\Http\Controllers\V1\SessionController;
 use App\Http\Controllers\V1\VideoController;
 use App\Http\Controllers\V1\WorkHourController;
@@ -24,7 +25,7 @@ Route::middleware('auth:api')->prefix('v1')->group(static function () {
     //TODO Access to this will go through CMS
     // Route::apiResource('organisations', OrganisationController::class);
 
-    Route::middleware('employee')->group(static function() {
+    Route::middleware('employee')->group(static function () {
         Route::apiResources([
             'equipments' => EquipmentController::class,
             'videos' => VideoController::class,
@@ -46,6 +47,12 @@ Route::middleware('auth:api')->prefix('v1')->group(static function () {
         ->group(static function () {
             Route::post('/individual', 'storeIndividual');
             Route::post('/join-group', 'joinGroup');
+        });
+
+    Route::controller(ScheduleController::class)
+        ->prefix('schedule')
+        ->group(static function () {
+            Route::get('/daily', 'getDailySchedule');
         });
 });
 

@@ -81,16 +81,15 @@ class MediaService implements MediaServiceInterface
      */
     private function upload(UploadedFile $file, string $path): string
     {
-        $uniqueId = uniqid('', true);
-        $name = $uniqueId . '_' . $file->getClientOriginalName();
+        $fileName = $file->hashName();
 
         $this->storage->putFileAs(
             $path,
             new IlluminateFile($file),
-            $name,
+            $fileName,
         );
 
-        return $name;
+        return $fileName;
     }
 
     /**

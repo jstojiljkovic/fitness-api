@@ -35,7 +35,7 @@ class WorkHourService implements WorkHourServiceInterface
      */
     public function store(array $data): array
     {
-        abort_unless(
+        abort_if(
             $this->workHourRepository->created(),
             404,
             'Work-hours are already created'

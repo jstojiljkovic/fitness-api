@@ -2,7 +2,9 @@
 
 namespace App\Repositories;
 
+use App\Enums\SessionStatusEnum;
 use App\Helpers\ApplicationHelper;
+use App\Http\Resources\ScheduledBlockResource;
 use App\Http\Resources\SessionResource;
 use App\Interfaces\Repositories\SessionRepositoryInterface;
 use App\Models\Session;
@@ -129,5 +131,21 @@ class EloquentSessionRepository implements SessionRepositoryInterface
         $session = Session::find($id);
 
         return SessionResource::make($session)->resolve();
+    }
+
+    /**
+     * @param string $workoutId
+     * @param string $date
+     *
+     * @return array
+     */
+    public function getDailyScheduled(string $workoutId, string $date): array
+    {
+        $sessions = Session::where('date', $date)
+            ->where('status', SessionStatusEnum::ACCEPTED)
+            ->where('workout_id', $workoutId)
+            ->get();
+
+        return ScheduledBlockResource::collection($sessions)->resolve();
     }
 }

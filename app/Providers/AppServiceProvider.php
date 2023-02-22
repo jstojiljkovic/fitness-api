@@ -6,6 +6,7 @@ use App\Interfaces\Services\AuthServiceInterface;
 use App\Interfaces\Services\EquipmentServiceInterface;
 use App\Interfaces\Services\MediaServiceInterface;
 use App\Interfaces\Services\OrganisationServiceInterface;
+use App\Interfaces\Services\ScheduleServiceInterface;
 use App\Interfaces\Services\SessionServiceInterface;
 use App\Interfaces\Services\UserServiceInterface;
 use App\Interfaces\Services\VideoServiceInterface;
@@ -15,6 +16,7 @@ use App\Services\AuthService;
 use App\Services\EquipmentService;
 use App\Services\MediaService;
 use App\Services\OrganisationService;
+use App\Services\ScheduleService;
 use App\Services\SessionService;
 use App\Services\UserService;
 use App\Services\VideoService;
@@ -40,6 +42,7 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(WorkoutServiceInterface::class, WorkoutService::class);
         $this->app->bind(WorkHourServiceInterface::class, WorkHourService::class);
         $this->app->bind(SessionServiceInterface::class, SessionService::class);
+        $this->app->bind(ScheduleServiceInterface::class, ScheduleService::class);
     }
 
     /**

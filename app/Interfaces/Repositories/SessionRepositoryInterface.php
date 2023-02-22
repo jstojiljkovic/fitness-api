@@ -71,4 +71,12 @@ interface SessionRepositoryInterface
      * @return array
      */
     public function get(string $id): array;
+
+    /**
+     * @param string $workoutId
+     * @param string $date
+     *
+     * @return array
+     */
+    public function getDailyScheduled(string $workoutId, string $date): array;
 }
