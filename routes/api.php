@@ -7,6 +7,7 @@ use App\Http\Controllers\V1\ScheduleController;
 use App\Http\Controllers\V1\SessionController;
 use App\Http\Controllers\V1\VideoController;
 use App\Http\Controllers\V1\WorkHourController;
+use App\Http\Controllers\V1\WorkHourExceptionController;
 use App\Http\Controllers\V1\WorkoutController;
 use Illuminate\Support\Facades\Route;
 
@@ -29,10 +30,14 @@ Route::middleware('auth:api')->prefix('v1')->group(static function () {
         Route::apiResources([
             'equipments' => EquipmentController::class,
             'videos' => VideoController::class,
-            'workouts' => WorkoutController::class
+            'workouts' => WorkoutController::class,
         ]);
+
         Route::apiResource('work-hours', WorkHourController::class)
             ->only([ 'index', 'store', 'update' ]);
+
+        Route::apiResource('work-hour-exceptions', WorkHourExceptionController::class)
+            ->only([ 'index', 'store', 'update', 'destroy' ]);
 
         Route::controller(SessionController::class)
             ->prefix('sessions')
