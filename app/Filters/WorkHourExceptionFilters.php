@@ -10,6 +10,7 @@ class WorkHourExceptionFilters
 
     /**
      * @param $query
+     * @param array $data
      *
      * @return mixed
      */
