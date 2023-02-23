@@ -51,6 +51,20 @@ class EquipmentService implements EquipmentServiceInterface
     }
 
     /**
+     * @param $id
+     *
+     * @return void
+     */
+    private function checkIfEquipmentExists($id): void
+    {
+        abort_unless(
+            $this->equipmentRepository->exists($id),
+            404,
+            'Equipment with the provided id does not exist.'
+        );
+    }
+
+    /**
      * @param string $id
      * @param array $data
      *
@@ -73,19 +87,5 @@ class EquipmentService implements EquipmentServiceInterface
         $this->checkIfEquipmentExists($id);
 
         $this->equipmentRepository->destroy($id);
-    }
-
-    /**
-     * @param $id
-     *
-     * @return void
-     */
-    private function checkIfEquipmentExists($id): void
-    {
-        abort_unless(
-            $this->equipmentRepository->exists($id),
-            404,
-            'Equipment with the provided id does not exist.'
-        );
     }
 }

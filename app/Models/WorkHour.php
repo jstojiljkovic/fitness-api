@@ -41,12 +41,14 @@ class WorkHour extends Model
      * @var bool
      */
     public $timestamps = false;
+
     /**
      * The table associated with the model.
      *
      * @var string
      */
     protected $table = 'work_hour';
+
     /**
      * The attributes that are mass assignable.
      *

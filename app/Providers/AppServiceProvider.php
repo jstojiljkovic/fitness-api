@@ -10,6 +10,7 @@ use App\Interfaces\Services\ScheduleServiceInterface;
 use App\Interfaces\Services\SessionServiceInterface;
 use App\Interfaces\Services\UserServiceInterface;
 use App\Interfaces\Services\VideoServiceInterface;
+use App\Interfaces\Services\WorkHourExceptionServiceInterface;
 use App\Interfaces\Services\WorkHourServiceInterface;
 use App\Interfaces\Services\WorkoutServiceInterface;
 use App\Services\AuthService;
@@ -20,6 +21,7 @@ use App\Services\ScheduleService;
 use App\Services\SessionService;
 use App\Services\UserService;
 use App\Services\VideoService;
+use App\Services\WorkHourExceptionService;
 use App\Services\WorkHourService;
 use App\Services\WorkoutService;
 use Illuminate\Support\ServiceProvider;
@@ -43,6 +45,7 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(WorkHourServiceInterface::class, WorkHourService::class);
         $this->app->bind(SessionServiceInterface::class, SessionService::class);
         $this->app->bind(ScheduleServiceInterface::class, ScheduleService::class);
+        $this->app->bind(WorkHourExceptionServiceInterface::class, WorkHourExceptionService::class);
     }
 
     /**
