@@ -8,6 +8,7 @@ use App\Interfaces\Repositories\OrganisationRepositoryInterface;
 use App\Interfaces\Repositories\SessionRepositoryInterface;
 use App\Interfaces\Repositories\UserRepositoryInterface;
 use App\Interfaces\Repositories\VideoRepositoryInterface;
+use App\Interfaces\Repositories\WorkHourExceptionRepositoryInterface;
 use App\Interfaces\Repositories\WorkHourRepositoryInterface;
 use App\Interfaces\Repositories\WorkoutRepositoryInterface;
 use App\Repositories\EloquentEquipmentRepository;
@@ -15,6 +16,7 @@ use App\Repositories\EloquentOrganisationRepository;
 use App\Repositories\EloquentSessionRepository;
 use App\Repositories\EloquentUserRepository;
 use App\Repositories\EloquentVideoRepository;
+use App\Repositories\EloquentWorkHourExceptionRepository;
 use App\Repositories\EloquentWorkHourRepository;
 use App\Repositories\EloquentWorkoutRepository;
 use Illuminate\Support\ServiceProvider;
@@ -35,6 +37,7 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->bind(WorkoutRepositoryInterface::class, EloquentWorkoutRepository::class);
         $this->app->bind(WorkHourRepositoryInterface::class, EloquentWorkHourRepository::class);
         $this->app->bind(SessionRepositoryInterface::class, EloquentSessionRepository::class);
+        $this->app->bind(WorkHourExceptionRepositoryInterface::class, EloquentWorkHourExceptionRepository::class);
     }
 
     /**
