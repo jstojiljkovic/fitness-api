@@ -7,17 +7,17 @@ services:
                 uid: 1000
             context: ./
             dockerfile: Dockerfile
-        image: fitness-api
-        container_name: fitness-api-app
+        image: onion-architecture-docker-api
+        container_name: onion-architecture-docker-api-app
         restart: unless-stopped
         working_dir: /var/www/
         volumes:
             - ./:/var/www
         networks:
-            - fitness-api
+            - onion-architecture-docker-api
     db:
         image: mysql:8.0
-        container_name: fitness-api-db
+        container_name: onion-architecture-docker-api-db
         restart: unless-stopped
         environment:
             MYSQL_DATABASE: ${DB_DATABASE}
@@ -27,11 +27,11 @@ services:
             SERVICE_TAGS: dev
             SERVICE_NAME: mysql
         networks:
-            - fitness-api
+            - onion-architecture-docker-api
 
     nginx:
         image: nginx:alpine
-        container_name: fitness-api-nginx
+        container_name: onion-architecture-docker-api-nginx
         restart: unless-stopped
         ports:
             - 8000:80
@@ -39,8 +39,8 @@ services:
             - ./:/var/www
             - ./docker-compose/nginx:/etc/nginx/conf.d/
         networks:
-            - fitness-api
+            - onion-architecture-docker-api
 
 networks:
-    fitness-api:
+    onion-architecture-docker-api:
         driver: bridge

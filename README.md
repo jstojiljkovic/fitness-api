@@ -1,4 +1,4 @@
-# fitness-api
+# Onion Architecture Docker Fitness API
 
 A smart digital api management solution for modern fitness entrepreneurs and personal trainers to simplify and streamline your business management, freeing you from the monotone paperwork so you have more freedom and energy for other pursuits.
 
