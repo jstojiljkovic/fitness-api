@@ -47,3 +47,6 @@ docker-compose exec app php artisan migrate --seed
 docker-compose exec app php artisan passport:client --personal
 ````
 
+You can pull out Postman collection which is in the root of application named
+`onion-architecture-docker-api.postman_collection.json`
+
