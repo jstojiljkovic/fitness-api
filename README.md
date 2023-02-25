@@ -6,15 +6,6 @@ You can create follow-up video content for every workout in your Fitness center.
 
 This API helps you to make instructions videos available to your clients so that you can simplify your work during the fitness sessions. We also offer a database with instruction videos you can use.
 
-### TODO
-- [x] Create v1 of ERD
-- [x] Architecture description
-- [ ] Implementation of v1 ERD
-- [ ] Build CMS (perhaps Nova?)
-- [ ] Basic description
-- [ ] Usage
-- [ ] Examples
-
 ### v1 ERD
 
 ![fitness-api drawio (2)](https://user-images.githubusercontent.com/22980168/216581867-a9a21fa1-7081-4575-ade1-80abb72b59d2.png)
@@ -32,16 +23,27 @@ Currently CRUD operations for Organisation is disabled due to them only being av
 
 # Configuration
 
-Before API usage, please rename `.env.example` into `.env`
+Before API usage, please rename `.env.example` into `.env` (and populate it based on the command outputs)
 
-Run this commands which will create a dummy admin account, with all the necessary dummy data for testing
+As this is dockerized all you have to do is run following command and enjoy playing:
+1. Build docker image
 ```bash
-php artisan migrate --seed
-```
-
-Admin credentials
-
+docker-compose build app
+````
+2. Run the environment in background mode
 ```bash
-username: admin@graphene.com
-password: password
-```
+docker-compose up -d
+````
+3. Install all the dependencies
+```bash
+docker-compose exec app composer install
+````
+3. Run the migrations and seeds
+```bash
+docker-compose exec app php artisan migrate --seed
+````
+3. Create a personal access client and addit to `.env`
+```bash
+docker-compose exec app php artisan passport:client --personal
+````
+
