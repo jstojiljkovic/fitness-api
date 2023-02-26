@@ -1,0 +1,142 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Onion Architecture Docker Fitness API Documentation",
+        "description": "L5 Swagger OpenApi description",
+        "contact": {
+            "email": "jstojiljkovic941@gmail.com"
+        },
+        "version": "1.0.0"
+    },
+    "paths": {
+        "/fitness-api/v1/equipments": {
+            "get": {
+                "tags": [
+                    "Equipment"
+                ],
+                "summary": "Returns all the equipments",
+                "description": "",
+                "operationId": "index",
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "properties": {
+                                                    "id": {
+                                                        "type": "integer",
+                                                        "example": "1"
+                                                    },
+                                                    "name": {
+                                                        "type": "string",
+                                                        "example": "Nis"
+                                                    },
+                                                    "country": {
+                                                        "type": "string",
+                                                        "example": "Serbia"
+                                                    },
+                                                    "description": {
+                                                        "type": "string",
+                                                        "example": "Drinking problem country"
+                                                    },
+                                                    "created_at": {
+                                                        "description": "Initial creation timestamp",
+                                                        "type": "string",
+                                                        "format": "date-time",
+                                                        "readOnly": "true"
+                                                    },
+                                                    "updated_at": {
+                                                        "description": "Last update timestamp",
+                                                        "type": "string",
+                                                        "format": "date-time",
+                                                        "readOnly": "true"
+                                                    },
+                                                    "comments": {
+                                                        "type": "array",
+                                                        "items": {
+                                                            "properties": {
+                                                                "id": {
+                                                                    "type": "integer",
+                                                                    "example": "1"
+                                                                },
+                                                                "comment": {
+                                                                    "type": "text",
+                                                                    "example": "This is just a random comment"
+                                                                },
+                                                                "city_id": {
+                                                                    "type": "integer",
+                                                                    "example": "1"
+                                                                },
+                                                                "created_at": {
+                                                                    "description": "Initial creation timestamp",
+                                                                    "type": "string",
+                                                                    "format": "date-time",
+                                                                    "readOnly": "true"
+                                                                },
+                                                                "updated_at": {
+                                                                    "description": "Last update timestamp",
+                                                                    "type": "string",
+                                                                    "format": "date-time",
+                                                                    "readOnly": "true"
+                                                                }
+                                                            },
+                                                            "type": "object"
+                                                        }
+                                                    }
+                                                },
+                                                "type": "object"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Returns when validation fails",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "The given data was invalid."
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Returns when user is not authenticated",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Invalid credentials."
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "barear": []
+                    }
+                ]
+            }
+        }
+    }
+}

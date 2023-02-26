@@ -9,6 +9,7 @@ use App\Http\Requests\Equipment\UpdateEquipmentRequest;
 use App\Interfaces\Services\EquipmentServiceInterface;
 use App\Interfaces\Services\MediaServiceInterface;
 use Illuminate\Http\JsonResponse;
+use OpenApi\Annotations as OA;
 use Symfony\Component\HttpFoundation\Response;
 
 class EquipmentController extends Controller
@@ -35,6 +36,55 @@ class EquipmentController extends Controller
 
     /**
      * Display a listing of the resource.
+     *
+     * @OA\Get(
+     *     path="/fitness-api/v1/equipments",
+     *     tags={"Equipment"},
+     *     operationId="index",
+     *     summary="Returns all the equipments",
+     *     description="",
+     *     security={ {"barear": {} }},
+     * @OA\Response(
+     *     response=200,
+     *     description="Success",
+     *     @OA\JsonContent(
+     *        @OA\Property(property="data", type="array",
+     *     @OA\Items(
+     *        @OA\Property(property="id", type="int", example="1"),
+     *        @OA\Property(property="name", type="string", example="Nis"),
+     *        @OA\Property(property="country", type="string", example="Serbia"),
+     *        @OA\Property(property="description", type="string", example="Drinking problem country"),
+     *        @OA\Property(property="created_at", type="string",
+     *     format="date-time", description="Initial creation timestamp", readOnly="true"),
+     *        @OA\Property(property="updated_at", type="string",
+     *     format="date-time", description="Last update timestamp", readOnly="true"),
+     *       @OA\Property(property="created_at", type="array",
+     *     @OA\Items(
+     *           @OA\Property(property="human", type="int", example="1"),
+     *           @OA\Property(property="date_time", type="text", example="This is just a random comment"),
+     *           @OA\Property(property="city_id", type="int", example="1"),
+     *        @OA\Property(property="created_at", type="string",
+     *     format="date-time", description="Initial creation timestamp", readOnly="true"),
+     *        @OA\Property(property="updated_at", type="string",
+     *     format="date-time", description="Last update timestamp", readOnly="true"),
+     *     )),)),)
+     *  ),
+     * @OA\Response(
+     *     response=422,
+     *     description="Returns when validation fails",
+     *     @OA\JsonContent(
+     *        @OA\Property(property="message", type="string", example="The given data was invalid."),
+     *     )
+     *  ),
+     * @OA\Response(
+     *     response=401,
+     *     description="Returns when user is not authenticated",
+     *     @OA\JsonContent(
+     *        @OA\Property(property="message", type="string", example="Invalid credentials."),
+     *     )
+     *  ),
+     * )
+     *
      *
      * @return JsonResponse
      */
